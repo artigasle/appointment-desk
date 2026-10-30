@@ -1,0 +1,11 @@
+const assert=require('node:assert/strict');
+const fs=require('node:fs');const path=require('node:path');const qa=path.join(__dirname,'output');const {makePDF,wrap,width}=require('../pdf.js');
+const data={heading:'DEPARTMENT OF THE AIR FORCE',organization:'EXAMPLE AIR MOBILITY SQUADRON',address:'123 Example Road\nExample AFB, XX 12345',memoDate:'30 October 2026',to:'SQUADRON PERSONNEL',from:'EXAMPLE/CC',subject:'Appointment of Primary Unit Safety Representative',paragraphs:['1. Effective 1 November 2026, TSgt Alex Rivera, Safety Technician, is appointed as the primary Unit Safety Representative for EXAMPLE AIR MOBILITY SQUADRON.','2. Authority: Example only. Replace with verified publication, paragraph, and local supplements.','3. Responsibilities: Carry out the responsibilities assigned by the approved unit safety program.','4. Qualifications / training: Example only. Enter a statement supported by verified training records.'],closing:'5. The point of contact for this memorandum is TSgt Alex Rivera, alex.rivera@example.invalid.',commander:'JANE A. DOE, Lt Col, USAF',commanderTitle:'Commander',draft:true,version:'TEST-1.0'};
+fs.mkdirSync(qa,{recursive:true});
+fs.writeFileSync(path.join(qa,'sample.pdf'),makePDF(data));
+fs.writeFileSync(path.join(qa,'long.pdf'),makePDF({...data,paragraphs:[...data.paragraphs,('Extensive responsibilities and detailed requirements. ').repeat(350)]}));
+fs.writeFileSync(path.join(qa,'accent.pdf'),makePDF({...data,commander:'JOSÉ MUÑOZ, Lt Col, USAF'}));
+assert.throws(()=>makePDF({...data,commander:'王'}),/Western European/);
+for(const line of wrap('W'.repeat(500)))assert(width(line)<=468);
+assert(makePDF({...data,draft:false}).length>1000);
+console.log('PDF generation, long-word wrapping, Latin-1 and unsupported-character tests passed.');

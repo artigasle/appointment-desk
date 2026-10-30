@@ -1,0 +1,5 @@
+.DS_Store
+appointment-setup*.json
+*.pdf
+*.eml
+tests/output/
