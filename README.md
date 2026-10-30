@@ -14,7 +14,7 @@ Extract the ZIP and open `index.html` in a modern desktop browser. Keep `app.js`
 4. Under **Build and deployment**, select **Deploy from a branch**, then **main** and **/(root)**. Save.
 5. Use the published URL shown in the Pages settings after deployment finishes.
 
-No Actions workflow or package install is required. If your account restricts Pages or your organization requires a different publishing process, follow that account's controls. This package has not been published to GitHub.
+No Actions workflow or package install is required. If your account restricts Pages or your organization requires a different publishing process, follow that account's controls. This repository publishes automatically from the root of `main` through GitHub Pages.
 
 ## Use
 
@@ -71,7 +71,7 @@ There is no automatic persistence or localStorage. Closing/reloading loses enter
 - One-page and seven-page outputs; long-word wrapping; accented text; explicit rejection of unsupported characters.
 - Visual inspection of the generated sample PDF.
 
-Not tested: actual CAC signing, certificate trust/revocation validation, government workstation browser policies, and deployment into your GitHub account. Test with a non-operational sample before use.
+Not tested: actual CAC signing, certificate trust/revocation validation, government workstation browser policies. Test with a non-operational sample before use.
 
 ## Future Microsoft 365 edition
 
